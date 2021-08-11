@@ -2,6 +2,8 @@
 		setup \
 		run
 
+PROJECT=fast-api-pypi
+
 venv/bin/activate: ## alias for virtual environment
 	python -m venv venv
 
@@ -11,3 +13,12 @@ setup: venv/bin/activate ## project setup
 
 run: venv/bin/activate ## Run
 	. venv/bin/activate; uvicorn main:app
+
+flake:
+	-flake8 *.py --max-line-length 100
+
+black:
+	-black *.py
+
+mypy:
+	-mypy *.py

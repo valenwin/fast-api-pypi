@@ -6,6 +6,11 @@
     <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
 </head>
 <body>
-<h1>{{ username }}</h1>
+<h1>{{ user_count }}</h1>
+<h1>{{ release_count }}</h1>
+<h1>{{ package_count }}</h1>
+{% for package in packages %}
+    <h1>{{ package.id }}</h1>
+{% endfor %}
 </body>
 </html>

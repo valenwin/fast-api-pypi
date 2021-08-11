@@ -11,11 +11,10 @@ import fastapi_jinja
 dev_mode = True
 
 folder = os.path.dirname(__file__)
-template_folder = os.path.join(folder, 'templates')
+template_folder = os.path.join(folder, "templates")
 template_folder = os.path.abspath(template_folder)
 
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 def main():
@@ -24,14 +23,22 @@ def main():
 
 
 def configure():
+    configure_templates()
+    configure_routes()
+
+
+def configure_templates():
     fastapi_jinja.global_init(template_folder, auto_reload=dev_mode)
 
+
+def configure_routes():
+    app.mount("/static", StaticFiles(directory="static"), name="static")
     app.include_router(home.router)
     app.include_router(account.router)
     app.include_router(packages.router)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
 else:
     configure()
